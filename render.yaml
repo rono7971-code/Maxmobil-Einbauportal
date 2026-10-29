@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: maxmobil-intern-pilot
+    runtime: python
+    buildCommand: echo "Keine Abhaengigkeiten"
+    startCommand: python3 server.py
+    healthCheckPath: /health
+    envVars:
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: PASS_EINBAUPARTNER
+        sync: false
+      - key: PASS_AUSSENDIENST
+        sync: false
+      - key: PASS_INNENDIENST
+        sync: false
