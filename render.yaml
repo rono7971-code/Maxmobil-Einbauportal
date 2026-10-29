@@ -2,6 +2,7 @@ services:
   - type: web
     name: maxmobil-intern-pilot
     runtime: python
+    plan: free
     buildCommand: echo "Keine Abhaengigkeiten"
     startCommand: python3 server.py
     healthCheckPath: /health
