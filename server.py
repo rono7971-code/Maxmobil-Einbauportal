@@ -20,9 +20,9 @@ ROLES = {
     'Innendienst': 'PASS_INNENDIENST',
 }
 SECRET = os.environ.get('SESSION_SECRET', '')
-MISSING = [v for v in ['SESSION_SECRET', *ROLES.values()] if len(os.environ.get(v, '')) < 16]
+MISSING = [v for v in ['SESSION_SECRET', *ROLES.values()] if len(os.environ.get(v, '')) < 4]
 if MISSING:
-    raise SystemExit('Fehlende/zu kurze Umgebungsvariablen (mindestens 16 Zeichen): ' + ', '.join(MISSING))
+    raise SystemExit('Fehlende/zu kurze Umgebungsvariablen (mindestens 4 Zeichen): ' + ', '.join(MISSING))
 if len(SECRET) < 32:
     raise SystemExit('SESSION_SECRET muss mindestens 32 Zeichen haben.')
 KEY = SECRET.encode()
@@ -52,6 +52,7 @@ LOGIN = '''<!doctype html><html lang="de"><meta charset="utf-8"><meta name="view
 
 class Handler(BaseHTTPRequestHandler):
     server_version = 'MaxmobilPilot/1'
+
     def log_message(self, fmt, *args):
         # Do not log form bodies, passwords or cookies.
         print('%s - %s' % (self.address_string(), fmt % args), flush=True)
